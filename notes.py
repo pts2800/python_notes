@@ -549,4 +549,86 @@ print(product_a) #24
 
 ###############################################################
 
+#errors and exceptions
+
+a = 5 print(a) #will throw syntax error for 'print' not being on new line
+print(a)) #will throw syntax error for too many brackets
+a = 5 + '10' #type error, can't add string and int
+import somemodulethatdoesntexist #modulenotfounderror
+b = c #C not defined, name error
+f = open('somefile.txt') #filenotfound error
+a = [1,2,3]
+a.remove(1)
+a.remove(4) #ValueError, 4 not in list
+a[4]
+print(a) #indexerror - index does not exist
+my_dict = {'name': 'max'}
+my_dict['age'] #keyerror - key doesn't exist
+
+x = -5
+if x < 0:
+    raise Exception('x should be positive')
+
+assert(x>=0), 'x is not positive'
+
+try:
+    a = 5 / 0 #will raise an error, can't divide by 0
+except:
+    print('an error happened')
+
+try:
+    a = 5 / 0
+except Exception as e:
+    print(e) #prints error from issue
+
+try:
+    a = 5 / 0
+    b = a + '10'
+except ZeroDivisionError as e:
+    print(e)
+except TypeError as e:
+    print(e)
+else:
+    print('everything is fine')
+finally: #will run no matter what
+    print('cleaning up....')
+
+#defining our own exceptoin
+class ValueTooHighError(Exception):
+    pass
+def test_value(x):
+    if x > 100:
+        raise ValueTooHighError("value is too high")
+try:
+    test_value(200) #will throw error
+except ValueTooHighError as e:
+    print(e)
+
+#defining our own exceptoin
+class ValueTooHighError(Exception):
+    pass
+class ValueTooSmallError(Exception):
+    def __init__(self, message, value):
+        self.message = message
+        self.value = value
+def test_value(x):
+    if x > 100:
+        raise ValueTooHighError("value is too high")
+    if x < 5:
+        raise ValueTooSmallError('value is too small', x)
+try:
+    test_value(200) #will throw error
+except ValueTooHighError as e:
+    print(e)
+except ValueTooSmallError as e:
+    print(e.message, e.value)
+
+###############################################################
+
+#logging: 
+
+import logging
+
+
+
 
