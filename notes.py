@@ -418,12 +418,135 @@ d.extendleft([4,5,6])
 d.rotate(1) #moves all elements to right by 1 index
 d.rotate(-1) #moves all eletements to left by 1 index
 
+###############################################################
+
+#intertools: product, permutations, combinations, accumlate, goupby, and infinite iterators
+
+#product
+from intertools import product
+a = [1,2]
+b = [3,4]
+prod = product(a,b)
+print(list(prod)) #[(1,3),(1,4),(2,3),(2,4)]
+a = [1,2]
+b = [3]
+prod = product(a,b)
+prod = product(a,b, repeat=2)
+print(list(prod)) #[(1,3,1,3),(1,3,2,3),(2,3,1,3),(2,3,2,3)]
+
+from itertools import permutations #returns all possible orderings
+a = [1,2,3]
+perm = permutations(a)
+print(list(perm)) #[(1,2,3),(1,3,2),(2,1,3),(2,3,1),(3,2,1),(3,1,2)]
+perm = permutations(a, 2) #only makes list of 2 pairs
+print(list(perm)) #[(1,2),(1,3),(2,1),(2,3),(3,1),(3,2)]
+
+from itertools import combinations #make all possibile combinations with a specified length
+a = [1,2,3,4]
+comb = combinations(a, 2) #lenth 2
+print(list(comb)) #[(1,2),(1,3),(1,4),(2,3),(2,4),(3,4)]
+
+from itertools import combinations, combinations_with_replacement
+comb_wr = combinations_with_replacement(a,2)
+print(list(comb_wr)) #will make combinations with smae number as well [(1,1),(1,3),etc]
+
+from itertools import accumlate #accumulated sums
+a = [1,2,3,4]
+acc = accumulate(a)
+print(a) #1,2,3,4
+print(list(a)) #1,3,6,10
+
+from itertools import accumlate #accumulated sums
+import operator
+a = [1,2,3,4]
+acc = accumulate(a, func=operator.mul) #multiple instead of sum
+print(a) #1,2,3,4
+print(list(a)) #1,3,6,24
+
+from itertools import accumlate #accumulated sums
+import operator
+a = [1,2,5,3,4]
+acc = accumulate(a, func=operator.maz) #finds maximum
+print(a) #1,2,3,4
+print(list(a)) #1,2,5,5,5
+
+import itertools import groupby
+def smaller_than_3(x):
+    return x < 3
+a = [1,2,3,4]
+group_obj = groupby(a, key=smaller_than_3)
+print(group_obj)
+for key, value in group_obj:
+    print(key, list(value)) # True [1,2], False [3,4]
+
+import itertools import groupby
+a = [1,2,3,4]
+group_obj = groupby(a, key=lambda x: x<3)
+print(group_obj)
+for key, value in group_obj:
+    print(key, list(value)) # True [1,2], False [3,4]
+
+#list of dictionary
+persons = [{'name': 'tim', 'age':25},{'name':'dan','age':25}]
+group_obj = groupby(perons, key=lambda x: x['age'])
+for key, value in group_obj:
+    print(key, list(value)) #25 [{'name':'Tim', 'age':25}, {'name',:'Dan','age':25}] (repeasts for each age in list)
+
+from intertools import count, cycle, repeat
+for i in count(10):
+    print(i) #creates loop starting at 10, will go indefinitely
+
+for i in count(10):
+    print(i)
+    if i == 15: #ends loop at 15
+        break
+
+a = [1,2,3]
+for i in cycle(a):
+    print(i) #will cycle indefinitely through list
+
+for i in repeat(1):
+    print(i) #will indefintely print 1
+
+for i in repeat(1,4): #will repeat '1' four times
+    print(i)
 
 ###############################################################
+
+#lambda arguements: expressions, 1 line functions without a name
+
+add10 = lambda x: x + 10
+add10(5)
+print(add10(5)) #will print 15
+
+#same as 
+def add10_func(x):
+    return x + 10
+
+mult = lambda x,y: x*y
+print(mult(2,7)) #print 14
+
+points2D = [(1,2),(15,1),(5,-1),(10,4)]
+points2D_sorted = sorted(points2D) #will sort by the X arguement of list
+points2D_sorted = sorted(points2D, key=lambda x: x[1]) #will sort by Y index
+points2D_sorted - sorted(points2D, key=lambda x: x[0] + x[1]) #sorted by sums of each tuple
+
+#map function #map(func,seq)
+a = [1,2,3,4,5]
+b = map(lambda x: x*2, a)
+print(list(b)) #[2,3,6,8,10]
+
+#filter functions: filter(func,seq) must return true or false and will return all elements that are true
+a = [1,2,3,4,5]
+b = filter(lambda x: x%2==2, a)
+print(list(b)) #2,4
+
+#reduce function: reduce(func, seq) - repeatdly 
+from functools import reduce
+a = [1,2,3,4]
+product_a = reduce(lambda x,y: x*y, a)
+print(product_a) #24
+
 ###############################################################
-###############################################################
-###############################################################
-###############################################################
-###############################################################
-###############################################################
-###############################################################
+
+
