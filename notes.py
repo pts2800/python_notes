@@ -627,8 +627,21 @@ except ValueTooSmallError as e:
 
 #logging: 
 
+import logging #5 different log levels, debug, info, warning, error, critical, by default name==root
+logging.basicConfig(level=logging.DEBUG, format=%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %H:%M:%S') #allows to show debug messages
+logging.debug('this is a debug message')
+logging.info('this is an info message')
+logging.warning('this is a warning message')
+logging.error('this is a error message')
+logging.critical('this is a critical message')
+
+#best practice for name - will create name based on module name (helper in this case)
+#main.py
 import logging
-
-
-
+logger = logging.getLogger(__name__)
+logger.info('hello from helper module')
+#helper.py
+import logging
+logging.basicConfig(level=logging.DEBUG, format=%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %H:%M:%S')
+import helper
 
