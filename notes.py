@@ -645,3 +645,25 @@ import logging
 logging.basicConfig(level=logging.DEBUG, format=%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%m/%d/%Y %H:%M:%S')
 import helper
 
+#helper.py with handler
+import logger
+logger = logging.getLogger(__name__)
+stream_h = logging.StreamHandler()
+file_h = logging.FileHandler('file.log')
+#handler
+stream_h.setLevel(logging.WARNING)
+file_h.setLevel(logging.ERROR)
+formatter = logging.Formatter('%(name)s - %(levelname)s - %(message)s')
+stream_h.setFormatter(formatter)
+file_h.setFormatter(formatter)
+logger.addHandler(stream_h)
+logger.addHandler(file_h)
+logger.warning('this is a warning')
+logger.error('this is an error')
+
+###############################################################
+
+#JSON data
+
+
+
