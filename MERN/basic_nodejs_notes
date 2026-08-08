@@ -1,1 +1,12 @@
+- install node.js
+- install MS Code
+- open ms code and create a new folder and/or project (project in this example: Bloopers)
+- create a folder called backend
+  - create a folder called controllers
+  - create a folder called routes
+  - create a file called server.js
+- create a folder called frontend
+
+how it works:
+server.js gets API call -> determines which route it should take -> the route determines which controller it should use. 
 
